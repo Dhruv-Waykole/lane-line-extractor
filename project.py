@@ -1,6 +1,6 @@
 import cv2 as cv
 import numpy as np
-img =cv.imread('/home/dhruv/Desktop/Photos/road1.jpg')
+img =cv.imread('/home/dhruv/Desktop/Photos/road2.jpg')
 
 
 def rescaleimage(frame, scale=1):
@@ -55,5 +55,9 @@ cv.imshow("hsv", result)
 cv.imshow("roi", result2)
 
 cv.imshow("polygon preview", preview)
+
+cv.imwrite("roi1.png", np.array(result2, dtype=np.uint8))
+cv.imwrite("hsv2.png", np.array(result, dtype=np.uint8))
+cv.imwrite("roi3.png", np.array(result2, dtype=np.uint8))
 cv.waitKey(0)
 

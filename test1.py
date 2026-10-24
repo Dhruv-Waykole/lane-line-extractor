@@ -1,6 +1,6 @@
 import cv2 as cv
 import numpy as np
-img =cv.imread('/home/dhruv/Desktop/Photos/road1.jpg')
+img =cv.imread('/home/dhruv/Desktop/Photos/road2.jpg')
 
 
 def region_of_interest(image, polygon):
@@ -72,4 +72,8 @@ cv.polylines(outline, polygon, True, (0, 0, 255), 3)
 cv.imshow("polygon outline", outline)
 cv.imshow("roi result", result)
 cv.imshow("hsv", result2)
+
+cv.imwrite("roi.png", np.array(result, dtype=np.uint8))
+cv.imwrite("hsv.png", np.array(result2, dtype=np.uint8))
+cv.imwrite("roi2.png", np.array(result, dtype=np.uint8))
 cv.waitKey(0)    
