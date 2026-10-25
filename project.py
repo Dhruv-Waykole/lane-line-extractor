@@ -1,6 +1,6 @@
 import cv2 as cv
 import numpy as np
-img =cv.imread('/home/dhruv/Desktop/Photos/road4.jpeg')
+img =cv.imread('/home/dhruv/Desktop/Photos/road1.jpg')
 
 
 def rescaleimage(frame, scale=1):
@@ -56,6 +56,8 @@ def auto_polygon(img, margin=0.03, top_frac=0.05):
     lines = cv.HoughLinesP(edges, 1, np.pi / 180, 40,
                            minLineLength=int(0.05 * h),
                            maxLineGap=int(0.05 * w))
+
+    
     if lines is None:
         return None
     lines = lines.reshape(-1, 4)
@@ -109,18 +111,10 @@ if polygon is None:
 
 lane_mask = cv.bitwise_or(white_mask, yellow_mask)
 roi_mask = region_of_interest(lane_mask, polygon)
-
 roi_result = cv.bitwise_and(img, img, mask=roi_mask)
 hsv_result = cv.bitwise_and(img, img, mask=lane_mask)
 
-
-
-
-
-
-
 cv.imshow("Canny edges", canny )
-
 cv.imshow("blur", blur)
 cv.imshow("img",img)
 cv.imshow("resized", resized)
@@ -128,14 +122,12 @@ cv.imshow("hsv", hsv_result)
 cv.imshow("roi", roi_result)
 cv.imshow("polygon preview", preview)
 
-
 cv.imwrite("IMAGE.jpg", img)
 cv.imwrite("HSV.jpg", np.array(hsv_result, dtype=np.uint8))
 cv.imwrite("GAUSSIAN_BLUR.jpg", blur )
 cv.imwrite("CANNY_EDGE.jpg", canny )
 cv.imwrite("POLYGON.jpg", preview )
 cv.imwrite("ROI.jpg", np.array(roi_result, dtype=np.uint8))
-
 
 cv.waitKey(0)
 
