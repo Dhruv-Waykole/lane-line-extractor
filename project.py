@@ -16,8 +16,8 @@ canny = cv.Canny(blur,125,175)
 
 resized= cv.resize(img, (500,500), interpolation=cv.INTER_CUBIC)
 hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)   
-white_mask = cv.inRange(hsv, np.array([0, 0, 200]), np.array([179, 40, 255]))
-yellow_mask = cv.inRange(hsv, np.array([15, 80, 120]), np.array([35, 255, 255]))
+white = cv.inRange(hsv, np.array([0, 0, 200]), np.array([179, 40, 255]))
+yellow = cv.inRange(hsv, np.array([15, 80, 120]), np.array([35, 255, 255]))
 
 
 
@@ -109,10 +109,10 @@ if polygon is None:
     polygon = np.array([[(0, h), (int(.35*w), int(.5*h)),
                          (int(.65*w), int(.5*h)), (w, h)]], dtype=np.int32)
 
-lane_mask = cv.bitwise_or(white_mask, yellow_mask)
-roi_mask = region_of_interest(lane_mask, polygon)
-roi_result = cv.bitwise_and(img, img, mask=roi_mask)
-hsv_result = cv.bitwise_and(img, img, mask=lane_mask)
+lane = cv.bitwise_or(white, yellow)
+roi = region_of_interest(lane, polygon)
+roi_result = cv.bitwise_and(img, img, mask=roi)
+hsv_result = cv.bitwise_and(img, img, mask=lane)
 
 cv.imshow("Canny edges", canny )
 cv.imshow("blur", blur)
