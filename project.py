@@ -11,7 +11,7 @@ def rescaleimage(frame, scale=1):
     return cv.resize(frame,dimensions,interpolation=cv.INTER_AREA)
 
 
-blur=cv.GaussianBlur(img, (5,5),cv.BORDER_DEFAULT)
+blur=cv.GaussianBlur(img, (5,5), 0)
 canny = cv.Canny(blur,125,175)
 
 resized= cv.resize(img, (500,500), interpolation=cv.INTER_CUBIC)
